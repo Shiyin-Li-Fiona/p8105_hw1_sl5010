@@ -53,6 +53,26 @@ data("penguins", package = "palmerpenguins")
 ```
 
 ```{r}
-
+head(penguins)
+## the data in this dataset, including names / values of important variables
+names(penguins)
+skimr::skim(penguins)
+## the size of the dataset (using nrow and ncol)
+nrow(penguins)
+ncol(penguins)
 ```
+## short description 
+names of important variables: "species" "island", "bill_length_mm", "bill_depth_mm", "flipper_length_mm", "body_mass_g", "sex", "year". There are **8 variables** in total. the size of the dataset: There are **344** rows and **8** columns in the dataset 
+the mean flipper length: **201.** (It is from the output of skimr::skim(penguins))
 
+## scatterplot
+
+```{r}
+## scatterplot of x and y
+ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm,color = species)) + geom_point()
+```
+## Export your first scatterplot to your project directory using ggsave.
+
+```{r}
+ggsave("scatter_plot.pdf", height = 4, width = 6)
+```
