@@ -1,28 +1,51 @@
 ---
 title: "p8105_hw1_sl5010"
-output: html_document
+output: github_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r}
+library(tidyverse)
 ```
 
-## R Markdown
+## Problem 1
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+```{r}
+df1 = tibble(
+norm_sample = rnorm(10),
+logical_vector= norm_sample >0,
+vec_char = c("a", "b", "c", "d","e", "f", "g", "h","i","j"),
+vec_factor = factor(c("cat", "dog", "bird", "cat", "dog", "bird", "cat", "dog", "bird", "bird"))
+)
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+df1
 ```
 
-## Including Plots
 
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r}
+mean(pull(df1,norm_sample))
+mean(pull(df1,logical_vector))
+mean(pull(df1,vec_char))
+mean(pull(df1,vec_factor))
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+Answer: mean of each first two variable (norm_sample, logical_vector) works, whereas the following two variable (vec_char, vec_factor) doesn't work
+
+```{r}
+as.numeric(pull(df1,logical_vector))
+as.numeric(pull(df1,vec_char))
+as.numeric(pull(df1,vec_factor))
+```
+
+### What happens? Why?
+The logical vector become 0 and 1, true represents 1 and false represents 0. Since their values was setted as 0 and 1 in the R language base.
+Character Variable become NA, that is, they are not able to be transform to numeric Variable. Since character could not be assigned values.
+Factor Variable becomes 1,2 and 3. Since there are only 3 level factors.
+
+### Does this help explain what happens when you try to take the mean?
+
+**Yes.**Since mean can only be taken for numeric values, and the logical vector can be transfered to numeric, norm_sample was setted to be numeric. However, Character Variable and Factor Variable can not be assigned numeric values, they do not have mean.
+
+```{r}
+
+```
+
