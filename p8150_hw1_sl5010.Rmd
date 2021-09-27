@@ -30,7 +30,7 @@ mean(pull(df1,vec_factor))
 
 Answer: mean of each first two variable (norm_sample, logical_vector) works, whereas the following two variable (vec_char, vec_factor) doesn't work
 
-```{r,result = hide}
+```{r,results='hide'}
 as.numeric(pull(df1,logical_vector))
 as.numeric(pull(df1,vec_char))
 as.numeric(pull(df1,vec_factor))
